@@ -1,0 +1,41 @@
+Wieczorek Kaja
+e-mail: kajawieczorek98@gmail.com,
+grupa: 1ID22A
+
+Temat 12: Obiektowe bazy danych
+
+Planowane użyte technologie:
+C#, baza Siaqodb, JSON
+
+Harmonogram:
+(dwa tygodnie na jeden etap)
+
+Etap 2&3:
+16.03-19.04: zaznajomienie się z tematem obiektowych baz danych i sporządzenie części teoretycznej
+* instalacja i konfiguracja,
+* omówienie obsługiwanych standardów (np. ODMG, JDO, LINQ, XQuery),
+* zapisywanie, aktualizacja i usuwanie obiektów wraz z przykładami,
+* metody pobierania obiektów, obsługiwane języki zapytań wraz z przykładami,
+* dziedziczenie, polimorfizm, hermetyzacja, abstrakcja (abstrakcyjność),
+* porównanie z relacyjnymi bazami danych.
+
+Etap 4 & 5:
+20.04-24.05: 
+-wybranie problemu dla praktycznej częsci projektu
+-rozpoczęcie jego realizacji
+
+Etap 6:
+25.05-07.06: realizacja problemu w relacyjnej bazie danych
+
+Etap 7:
+08.06-21.06: Przygotowanie porównania wykonanych dwóch praktycznych części
+
+// 22.06-25.06: ostatnie poprawki
+
+Etap 8:
+26.06 - godziny 12:00 wgranie końcowej wersji projektu 
+
+Podział prac w zespole: praca samodzielna
+
+Temat projetku z przedmiotu "Programowanie systemów rozproszonych": Graf
+Temat pracy inżynierskiej: "System monitorowania aktywności zwierząt domowych wykorzystujący Arduino oraz Raspberry Pi"
