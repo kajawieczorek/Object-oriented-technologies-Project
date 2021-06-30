@@ -16,64 +16,92 @@ namespace HomeDBSqlite
     {
         public static void Main(string[] args)
         {
-            string dbName = "TestDatabase.db";
-            if (File.Exists(dbName))
-            {
-                File.Delete(dbName);
-            }
-
             using (var dbContext = new MyDbContext())
             {
                 var gen = new Generator(dbContext);
-
                 dbContext.Database.EnsureCreated();
 
+                //gen.LoadData();
 
-                /*var people = gen.RandomPeople();
-                var companies = gen.RandomCompanies();
-                dbContext.People.AddRange(people);
-                dbContext.Companies.AddRange(companies);
-                dbContext.SaveChanges();
-
-                var homes = new List<Home>();
-                for (int i = 0; i < 1000; i++)
+                /*MeasureTime(() =>
                 {
-                    homes.Add(gen.RandomHome());
-                }
-                dbContext.Homes.AddRange(homes);
-                dbContext.SaveChanges();
-*/
-                var t = new Stopwatch();
-                long sum = 0;
-                double areaOfWindows = 0;
-                for (int i = 0; i < 10; i++)
-                {
-                    t.Start();
-                    areaOfWindows = dbContext.Homes.Sum(x => x.Rooms.Sum(r => r.Windows.Sum(w => w.Area)));
-                    t.Stop();
-                    sum += t.ElapsedMilliseconds;
-                }
-                Console.WriteLine($"Powierzchnia okien: {areaOfWindows}. Czas: {sum / 10}");
+                    var areaOfWindows = dbContext.Homes.Sum(x => x.Rooms.Sum(r => r.Windows.Sum(w => w.Area)));
+                }, "o powierzchnię okien");
 
-
-                var time = new Stopwatch();
-                long suma = 0;
-                Tuple<int, double> homeWithMaxNorthWindows = Tuple.Create(0, 0d);
-                for (int i = 0; i < 10; i++)
+                MeasureTime(() =>
                 {
-                    time.Start();
-                    homeWithMaxNorthWindows = dbContext.Homes
-                        .OrderByDescending(x => x.Rooms.Sum(r => r.Windows.Where(w => w.Side == "północ")
-                        .Sum(x => x.Area))).Select(h => new Tuple<int, double>(h.OID, h.Rooms.Sum(r => r.Windows.Sum(w => w.Area)))).FirstOrDefault();
-                    time.Stop();
-                    suma += time.ElapsedMilliseconds;
+                    var nhomeWithMaxNorthWindows = dbContext.Homes.OrderByDescending(x => x.Rooms.Sum(r => r.Windows.Where(w => w.Side == "północ")
+                                    .Sum(a => a.Area))).FirstOrDefault();
+                }, "o dom z największą powierzchnią okien na północ"); */
+
+                var two = new List<Home>();
+                MeasureTime(() =>
+                {
+                    two = dbContext.Homes.Where(x => x.Rooms.Count(r => r.Name == "sypialnia") > 1).ToList();
+                }, "z dwoma złączeniami");
+                foreach (var item in two)
+                {
+                    Console.WriteLine($"ID: {item.OID}");
                 }
 
-                //var area = homeWithMaxNorthWindows.Rooms.Sum(x => x.Windows.Sum(a => a.Area));
-                Console.WriteLine($"Dom z największą powierzchnią okien na północ: {homeWithMaxNorthWindows.Item1}. Powierzchnia: {homeWithMaxNorthWindows.Item2} Czas: {suma / 10}");
-                Console.WriteLine("OK");
+                /*
+                var three = new List<Home>();
+                MeasureTime(() =>
+                {
+                     three = dbContext.Homes.Where(x => x.Occupants.Any(x => x.PersonOccupant.Name == "James")
+                                                && x.Rooms.Count(r => r.Name == "sypialnia") > 1).ToList();
+                }, "z trzema złączeniami");
+                foreach (var item in three)
+                {
+                    Console.WriteLine($"ID: {item.OID}");
+                }
+                MeasureTime(() =>
+                {
+                    var four = dbContext.Homes.Where(x => x.Occupants.Any(x => x.PersonOccupant.Name == "James")
+                                                && x.Rooms.Count(r => r.Name == "sypialnia") > 1
+                                                && x.Rooms.Any(f => f.Furniture.Count() > 3
+                                                && f.Name == "sypialnia"))
+                                                .ToList();
+                }, "z czterema złączeniami");*/
+
+
+                /*MeasureTime(() =>
+                {
+                    var five = dbContext.Homes.Where(x => x.Owners.Any(o => o.CompanyOwner.Headquaters.City.Contains("Lake")) 
+                                                 && x.Rooms.Any(w => w.Windows.Any(s => s.Side == "wschód")
+                                                 && x.Occupants.Count() >= 2)).ToList();
+                }, "z pięcioma złączeniami");
+
+                MeasureTime(() =>
+                {
+                    var six = dbContext.Homes.Where(x => x.Owners.Any(o => o.CompanyOwner.Headquaters.City.Contains("Lake") && o.Share > 30)
+                                            && x.Rooms.Any(w => w.Windows.Any(s => s.Side == "wschód")
+                                            && w.Furniture.Any(t => t.Name == "komoda")
+                                            && x.Occupants.Count() >= 2)
+                                            && x.Address.City.Contains("Lake"))
+                                            .ToList();
+                }, "z ośmioma złączeniami");*/
             }
             Console.ReadLine();
+        }
+        private static void MeasureTime(Action func, string message)
+        {
+            var stopwatch = new Stopwatch();
+            long sum = 0;
+            for (int i = 0; i < 10; i++)
+            {
+                stopwatch.Reset();
+                stopwatch.Start();
+                func();
+                stopwatch.Stop();
+                sum += stopwatch.ElapsedMilliseconds;
+                if (i == 0)
+                {
+                    Console.WriteLine($"Pierwsze zapytanie: {sum}");
+                }
+            }
+
+            Console.WriteLine($"Zapytanie {message} średnio zajęło: {sum / 10}");
         }
     }
 }

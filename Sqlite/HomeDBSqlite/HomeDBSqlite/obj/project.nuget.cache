@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "in7JRyZOzfnhd+mnUmEVyM4naZqYD+dhYlV/5slvD4tcCMJItZwBFN0gjPJv3P9ol2f4nDQ6o4gwcvs4/R+MkA==",
+  "dgSpecHash": "6X9BOKTtjH6zdKM3fuCmXTOnLnLEXtXGzw7g1/u3ddOgxvA/PyCnKPgpt/NujqyZm4DCYhy5Eaq/jCSCe20jlw==",
   "success": true,
-  "projectFilePath": "D:\\Uczelnia\\TO\\Sqlite\\HomeDBSqlite\\HomeDBSqlite\\HomeDBSqlite.csproj",
+  "projectFilePath": "D:\\Uczelnia\\TO\\Object-oriented-technologies-Project\\Sqlite\\HomeDBSqlite\\HomeDBSqlite\\HomeDBSqlite.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Kaja Wieczorek\\.nuget\\packages\\microsoft.data.sqlite.core\\5.0.6\\microsoft.data.sqlite.core.5.0.6.nupkg.sha512",
     "C:\\Users\\Kaja Wieczorek\\.nuget\\packages\\microsoft.dotnet.platformabstractions\\3.1.6\\microsoft.dotnet.platformabstractions.3.1.6.nupkg.sha512",

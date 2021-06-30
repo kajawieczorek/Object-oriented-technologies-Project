@@ -15,6 +15,38 @@ namespace ObjectDatabase
         {
             this.db = db;
         }
+        public void LoadData()
+        {
+            var people = RandomPeople();
+            var companies = RandomCompanies();
+            foreach (var person in people)
+            {
+                db.StoreObject(person);
+            }
+            foreach (var company in companies)
+            {
+                db.StoreObject(company);
+            }
+            for (int i = 0; i < 100; i++)
+            {
+                db.StoreObject(RandomHome());
+            }
+
+            var addr = new Address() { Street = "Six", BuildingNumber = "6", City = "Lake" };
+            var comp = new Company() { Name = "forSix", PhoneNumber = "998774663", Headquaters = addr };
+            var own = new Owner() { CompanyOwner = comp, Share = 70 };
+            var ppl = new List<Occupant>(){new Occupant { PersonOccupant = new Person() { Name = "Kaja", Surname = "Test", PhoneNumber = "890234234"} },
+                                               new Occupant{ PersonOccupant = new Person() { Name = "Anna", Surname = "Lato", PhoneNumber = "890234234"}} };
+
+            var forSix = new Home()
+            {
+                Owners = new List<Owner> { own },
+                Address = addr,
+                Rooms = new List<Room>() { new Room() { Name = "sypialnia", Furniture = new List<Furniture>() { new Furniture() { Name = "komoda" } }, Windows = new List<Window>() { new Window() { Side = "wschód" } } } },
+                Occupants = ppl
+            };
+            db.StoreObject(forSix);
+        }
 
         public string RandName()
         {
@@ -39,6 +71,8 @@ namespace ObjectDatabase
 
             return surnames[rand.Next(0, surnames.Length - 1)];
         }
+
+
         public string RandomStreet()
         {
             var surnames = new string[] { "Hollybush Hills", "Sea View Down", "Clement Lea", "Torrington Knoll", "Horseguards", "Westbury Bridge", "Yew Brook",
@@ -261,7 +295,7 @@ namespace ObjectDatabase
                 var name = RandomCompanyName();
                 companies.Add(new Company()
                 {
-                    Name = RandomCompanyName(),
+                    Name = name,
                     PhoneNumber = RandomNumber(9),
                     Headquaters = RandomAddress(),
                     Email = $"{name}@email.com",
@@ -311,7 +345,7 @@ namespace ObjectDatabase
                     newObjectShare = random.Next(1, avaliableShare);
                 }
 
-                if (random.Next(0, 1) == 0)
+                if (random.Next(0, 2) == 0)
                 {
                     owners.Add(new Owner() { PersonOwner = people[random.Next(0, people.Count() - 1)], Share = newObjectShare * 10 });
                 }

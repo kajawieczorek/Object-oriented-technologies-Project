@@ -12,16 +12,6 @@ namespace ObjectDatabase
 {
     class Program
     {
-        private static void MeasureTime(Action func, string message)
-        {
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
-            func();
-            stopwatch.Stop();
-            Console.WriteLine($"Zapytanie {message} zajęło: {stopwatch.Elapsed}");
-
-        }
-
         static void Main(string[] args)
         {
             var dbPath = Path.Combine(Path.GetDirectoryName(Environment.GetCommandLineArgs().First()), "Data");
@@ -33,56 +23,70 @@ namespace ObjectDatabase
 
             var gen = new Generator(db);
 
-            var people = gen.RandomPeople();
-            var companies = gen.RandomCompanies();
-            foreach (var person in people)
-            {
-                db.StoreObject(person);
-            }
-            foreach (var company in companies)
-            {
-                db.StoreObject(company);
-            }
-            for (int i = 0; i < 1000; i++)
-            {
-                db.StoreObject(gen.RandomHome());
-            }
-            double areaOfWindows = 0;
-            var homeWithMaxNorthWindows = new Home();
-            var time = new Stopwatch();
-            long sumw = 0;
-            for (int i = 0; i < 10; i++)
-            {
-                time.Start();
-                //MeasureTime(() =>
-                // {
-                areaOfWindows = db.LoadAll<Home>().Sum(x => x.Rooms.Sum(r => r.Windows.Sum(w => w.Area)));
-                // }, "o powierzchnię okien");
-                time.Stop();
-                sumw += time.ElapsedMilliseconds;
-            }
-            Console.WriteLine($"Powierzchnia okien: {areaOfWindows}, czas:{sumw/10}");
+            gen.LoadData();
 
-            var t = new Stopwatch();
-            long sum = 0;
-            for (int i = 0; i < 10; i++)
+            MeasureTime(() =>
             {
-                t.Start();
-                // MeasureTime(() =>
-                //{
-                homeWithMaxNorthWindows = db.LoadAll<Home>().OrderByDescending(x => x.Rooms.Sum(r => r.Windows.Where(w => w.Side == "północ").Sum(a => a.Area))).FirstOrDefault();
-                // }, "o dom z największą powierzchnią okien wychodzących na północ");
-                t.Stop();
-                sum += t.ElapsedMilliseconds;
-            }
+                var two = db.LoadAll<Home>().Where(x => x.Rooms.Count(r => r.Name == "sypialnia") > 1).ToList();
+            }, "z dwoma złączeniami");
 
-            Console.WriteLine($"Dom z max pow. okien na północ. Wynik oid: {homeWithMaxNorthWindows.OID}, " +
-                $"\npowierzchnia okien: {homeWithMaxNorthWindows.Rooms.Sum(x => x.Windows.Sum(w => w.Area))}" +
-                $"\nCzas: {sum/10}");
+            MeasureTime(() =>
+            {
+                var three = db.LoadAll<Home>().Where(x => x.Occupants.Any(y => y.PersonOccupant.Name == "James")
+                                            && x.Rooms.Count(r => r.Name == "sypialnia") > 1).ToList();
+            }, "z trzema złączeniami");
+
+            MeasureTime(() =>
+            {
+                var four = db.LoadAll<Home>().Where(x => x.Occupants.Any(y => y.PersonOccupant.Name == "James")
+                                            && x.Rooms.Count(r => r.Name == "sypialnia") > 1
+                                            && x.Rooms.Any(f => f.Furniture.Count() > 3
+                                            && f.Name == "sypialnia"))
+                                            .ToList();
+            }, "z czterema złączeniami");
+
+            MeasureTime(() =>
+            {
+                var five = db.LoadAll<Home>().Where(x => x.Owners.Any(o => o.CompanyOwner != null 
+                                             && o.CompanyOwner.Headquaters.City.Contains("Lake")) 
+                                             && x.Rooms.Any(w => w.Windows.Any(s => s.Side == "wschód")
+                                             && x.Occupants.Count() >= 2)).ToList();
+            }, "z pięcioma złączeniami");
+
+            MeasureTime(() =>
+            {
+                var six = db.LoadAll<Home>().Where(x => x.Owners.Any(o => o.CompanyOwner != null 
+                                        && o.CompanyOwner.Headquaters.City.Contains("Lake") 
+                                        && o.Share > 30)
+                                        && x.Rooms.Any(w => w.Windows.Any(s => s.Side == "wschód")
+                                        && w.Furniture.Any(t => t.Name == "komoda")
+                                        && x.Occupants.Count() >= 2)
+                                        && x.Address.City.Contains("Lake"))
+                                        .ToList();
+            }, "z ośmioma złączeniami");
 
             Console.WriteLine("OK");
             Console.ReadLine();
+        }
 
+        private static void MeasureTime(Action func, string message)
+        {
+            var stopwatch = new Stopwatch();
+            long sum = 0;
+            for (int i = 0; i < 10; i++)
+            {
+                stopwatch.Reset();
+                stopwatch.Start();
+                func();
+                stopwatch.Stop();
+                sum += stopwatch.ElapsedMilliseconds;
+                if (i == 0)
+                {
+                    Console.WriteLine($"Pierwsze zapytanie: {sum}");
+                }
+            }
+
+            Console.WriteLine($"Zapytanie {message} średnio zajęło: {sum / 10}");
         }
     }
 }

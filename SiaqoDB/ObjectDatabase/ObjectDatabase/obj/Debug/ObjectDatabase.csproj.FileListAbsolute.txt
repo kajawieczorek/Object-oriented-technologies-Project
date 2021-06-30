@@ -12,3 +12,17 @@ D:\Uczelnia\TO\SiaqoDB\ObjectDatabase\ObjectDatabase\obj\Debug\ObjectDatabase.cs
 D:\Uczelnia\TO\SiaqoDB\ObjectDatabase\ObjectDatabase\obj\Debug\ObjectDatabase.csproj.CopyComplete
 D:\Uczelnia\TO\SiaqoDB\ObjectDatabase\ObjectDatabase\obj\Debug\ObjectDatabase.exe
 D:\Uczelnia\TO\SiaqoDB\ObjectDatabase\ObjectDatabase\obj\Debug\ObjectDatabase.pdb
+D:\Uczelnia\TO\Object-oriented-technologies-Project\SiaqoDB\ObjectDatabase\ObjectDatabase\bin\Debug\lmdb32.dll
+D:\Uczelnia\TO\Object-oriented-technologies-Project\SiaqoDB\ObjectDatabase\ObjectDatabase\bin\Debug\lmdb64.dll
+D:\Uczelnia\TO\Object-oriented-technologies-Project\SiaqoDB\ObjectDatabase\ObjectDatabase\bin\Debug\ObjectDatabase.exe.config
+D:\Uczelnia\TO\Object-oriented-technologies-Project\SiaqoDB\ObjectDatabase\ObjectDatabase\bin\Debug\ObjectDatabase.exe
+D:\Uczelnia\TO\Object-oriented-technologies-Project\SiaqoDB\ObjectDatabase\ObjectDatabase\bin\Debug\ObjectDatabase.pdb
+D:\Uczelnia\TO\Object-oriented-technologies-Project\SiaqoDB\ObjectDatabase\ObjectDatabase\bin\Debug\Siaqodb.dll
+D:\Uczelnia\TO\Object-oriented-technologies-Project\SiaqoDB\ObjectDatabase\ObjectDatabase\bin\Debug\SiaqodbPortable.dll
+D:\Uczelnia\TO\Object-oriented-technologies-Project\SiaqoDB\ObjectDatabase\ObjectDatabase\bin\Debug\Siaqodb.xml
+D:\Uczelnia\TO\Object-oriented-technologies-Project\SiaqoDB\ObjectDatabase\ObjectDatabase\bin\Debug\SiaqodbPortable.xml
+D:\Uczelnia\TO\Object-oriented-technologies-Project\SiaqoDB\ObjectDatabase\ObjectDatabase\obj\Debug\ObjectDatabase.csproj.CoreCompileInputs.cache
+D:\Uczelnia\TO\Object-oriented-technologies-Project\SiaqoDB\ObjectDatabase\ObjectDatabase\obj\Debug\ObjectDatabase.csproj.CopyComplete
+D:\Uczelnia\TO\Object-oriented-technologies-Project\SiaqoDB\ObjectDatabase\ObjectDatabase\obj\Debug\ObjectDatabase.exe
+D:\Uczelnia\TO\Object-oriented-technologies-Project\SiaqoDB\ObjectDatabase\ObjectDatabase\obj\Debug\ObjectDatabase.pdb
+D:\Uczelnia\TO\Object-oriented-technologies-Project\SiaqoDB\ObjectDatabase\ObjectDatabase\obj\Debug\ObjectDatabase.csprojAssemblyReference.cache

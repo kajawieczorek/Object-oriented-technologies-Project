@@ -14,6 +14,22 @@ namespace HomeDBSqlite
         {
             this.db = db;
         }
+        public void LoadData()
+        {
+            var people = RandomPeople();
+            var companies = RandomCompanies();
+            db.People.AddRange(people);
+            db.Companies.AddRange(companies);
+            db.SaveChanges();
+
+            var homes = new List<Home>();
+            for (int i = 0; i < 100; i++)
+            {
+                homes.Add(RandomHome());
+            }
+            db.Homes.AddRange(homes);
+            db.SaveChanges();
+        }
 
         public string RandName()
         {
@@ -168,7 +184,7 @@ namespace HomeDBSqlite
                 names = CheckFurnitureToAdd(roomDict[room.Name], f, room);
             }
 
-            furniture.Name = names[random.Next(0, names.Count() - 1)];
+            furniture.Name = names[random.Next(0, names.Count())];
 
             return furniture;
         }
@@ -194,10 +210,10 @@ namespace HomeDBSqlite
                     types = CheckRoomToAdd(mustHave, type, home);
                 }
 
-            room.Name = types[random.Next(0, types.Count() - 1)];
+            room.Name = types[random.Next(0, types.Count())];
             room.Area = random.Next(5, 25);
             room.Doors = new List<Door>() { RandomDoor() };
-            if (random.Next(0, 1) == 0) { room.Doors.Add(RandomDoor()); }
+            if (random.Next(0, 2) == 0) { room.Doors.Add(RandomDoor()); }
             room.Windows = new List<Window>();
             room.Windows.AddRange(RandomWindows(room.Area));
             room.Furniture = new List<Furniture>();
@@ -258,7 +274,7 @@ namespace HomeDBSqlite
                 var name = RandomCompanyName();
                 companies.Add(new Company()
                 {
-                    Name = RandomCompanyName(),
+                    Name = name,
                     PhoneNumber = RandomNumber(9),
                     Headquaters = RandomAddress(),
                     Email = $"{name}@email.com",
@@ -308,7 +324,7 @@ namespace HomeDBSqlite
                     newObjectShare = random.Next(1, avaliableShare);
                 }
 
-                if (random.Next(0, 1) == 0)
+                if (random.Next(0, 2) == 0)
                 {
                     owners.Add(new Owner() { PersonOwner = people[random.Next(0, people.Count() - 1)], Share = newObjectShare * 10 });
                 }

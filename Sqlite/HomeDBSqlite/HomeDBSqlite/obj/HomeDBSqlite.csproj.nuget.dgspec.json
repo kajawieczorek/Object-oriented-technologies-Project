@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Uczelnia\\TO\\Sqlite\\HomeDBSqlite\\HomeDBSqlite\\HomeDBSqlite.csproj": {}
+    "D:\\Uczelnia\\TO\\Object-oriented-technologies-Project\\Sqlite\\HomeDBSqlite\\HomeDBSqlite\\HomeDBSqlite.csproj": {}
   },
   "projects": {
-    "D:\\Uczelnia\\TO\\Sqlite\\HomeDBSqlite\\HomeDBSqlite\\HomeDBSqlite.csproj": {
+    "D:\\Uczelnia\\TO\\Object-oriented-technologies-Project\\Sqlite\\HomeDBSqlite\\HomeDBSqlite\\HomeDBSqlite.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Uczelnia\\TO\\Sqlite\\HomeDBSqlite\\HomeDBSqlite\\HomeDBSqlite.csproj",
+        "projectUniqueName": "D:\\Uczelnia\\TO\\Object-oriented-technologies-Project\\Sqlite\\HomeDBSqlite\\HomeDBSqlite\\HomeDBSqlite.csproj",
         "projectName": "HomeDBSqlite",
-        "projectPath": "D:\\Uczelnia\\TO\\Sqlite\\HomeDBSqlite\\HomeDBSqlite\\HomeDBSqlite.csproj",
+        "projectPath": "D:\\Uczelnia\\TO\\Object-oriented-technologies-Project\\Sqlite\\HomeDBSqlite\\HomeDBSqlite\\HomeDBSqlite.csproj",
         "packagesPath": "C:\\Users\\Kaja Wieczorek\\.nuget\\packages\\",
-        "outputPath": "D:\\Uczelnia\\TO\\Sqlite\\HomeDBSqlite\\HomeDBSqlite\\obj\\",
+        "outputPath": "D:\\Uczelnia\\TO\\Object-oriented-technologies-Project\\Sqlite\\HomeDBSqlite\\HomeDBSqlite\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
